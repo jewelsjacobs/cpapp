@@ -1,38 +1,104 @@
-<form action="" method="POST" role="form">
-	<legend>Sign in</legend>
-
-	<div class="form-group">
-		<label for="">username</label>
-		<input ng-model="login.username" type="text" class="form-control" id="" placeholder="username">
+<button class="btn btn-primary" ng-click="api.getUsers()">get users</button>
+<div class="row">
+	<div class="col-md-4">
+		<ul>
+			<li ng-repeat="user in users" style="cursor:pointer;"><span ng-click="api.getUser('819')">{{user.username}}</span></li>
+		</ul>
 	</div>
-	<div class="form-group">
-		<label for="">password</label>
-		<input ng-model="login.password" type="password" class="form-control" id="" placeholder="password">
-	</div>	
-
-	
-
-	<button ng-click="doLogin()" type="button" class="btn btn-primary">Submit</button>
-
-
-	<button ng-click="doLogout()" type="button" class="btn btn-primary">Log Out</button>
-</form>
-
-<form action="" method="POST" role="form">
-	<legend>Sign up</legend>
-
-	<div class="form-group">
-		<label for="">username</label>
-		<input ng-model="signup.username" type="text" class="form-control" id="" placeholder="username">
+	<div class="col-md-8">
+		<ul>
+			<li ng-repeat="field in showUser">{{field}}</li>
+		</ul>
 	</div>
-	<div class="form-group">
-		<label for="">email</label>
-		<input ng-model="signup.email" type="email" class="form-control" id="" placeholder="email">
-	</div>		
-	<div class="form-group">
-		<label for="">password</label>
-		<input ng-model="signup.password" type="password" class="form-control" id="" placeholder="password">
-	</div>	
+</div>
 
-	<button ng-click="doSignup()" type="button" class="btn btn-primary">Signup</button>
-</form>
+<br>
+
+
+<div class="row">
+	<div class="col-lg-4">
+		<form action="" method="POST" role="form">
+			<legend>Login</legend>
+
+			<div class="form-group">
+				<label for="">username</label>
+				<input ng-model="login.username" type="text" class="form-control" id="" placeholder="username">
+			</div>
+
+			<div class="form-group">
+				<label for="">password</label>
+				<input ng-model="login.password" type="password" class="form-control" id="" placeholder="password">
+			</div>
+
+			<button class="btn btn-primary" ng-click="api.login(login)">Login</button>
+		</form>
+	</div>
+	<div class="col-lg-8">
+		<div ng-if="loggedIn.user">
+			<h2>Hey {{loggedIn.user.firstname}}, you successfully logged in!</h2>
+			<p>Your token is: {{loggedIn.token.id}}</p>
+
+			<div class="form-group">
+				<label for="">Create a Site</label>
+				<input ng-model="newSite.name" type="text" class="form-control" id="" placeholder="name">
+				<br>
+				<input ng-model="newSite.domain" type="text" class="form-control" id="" placeholder="domain">
+			</div>
+			<button class="btn btn-primary" ng-click="api.createSite()">Create Site</button>
+
+			<h3>Sites I own</h3>
+			<ul>
+				<li ng-repeat="site in mySites">{{site.name}} - {{site.domain}}</li>
+			</ul>
+
+		</div>
+	</div>
+</div>
+  
+<div class="row">
+	<div class="col-lg-4">
+		<form action="" method="POST" role="form">
+			<legend>New User</legend>
+
+			<div class="form-group">
+				<label for="">username</label>
+				<input ng-model="login.username" type="text" class="form-control" id="" placeholder="username">
+			</div>
+			<div class="form-group">
+				<label for="">email</label>
+				<input ng-model="login.email" type="text" class="form-control" id="" placeholder="email">
+			</div>			
+
+			<div class="form-group">
+				<label for="">password</label>
+				<input ng-model="login.password" type="password" class="form-control" id="" placeholder="password">
+			</div>
+
+			<div class="form-group">
+				<label for="">First Name</label>
+				<input ng-model="login.firstname" type="text" class="form-control" id="" placeholder="First">
+			</div>
+
+			<div class="form-group">
+				<label for="">Last Name</label>
+				<input ng-model="login.lastname" type="text" class="form-control" id="" placeholder="Last">
+			</div>
+			<div class="form-group">
+				<label for="">Question</label>
+				<select ng-model="login.question.id" 
+				ng-options="option.id as option.question for option in questions.questions"
+				>test</select>
+				<input ng-model="login.question.answer" type="text" class="form-control" id="" placeholder="answer">
+				<input type="hidden" name="yourSelect" value="{{signup.question.id}}" />
+			</div>
+
+			<button class="btn btn-primary" ng-click="api.signup()">signup</button>
+		</form>
+	</div>
+	<div class="col-lg-8">
+		
+	</div>
+</div>
+    
+
+

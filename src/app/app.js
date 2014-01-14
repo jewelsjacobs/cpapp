@@ -1,16 +1,21 @@
 angular.module( 'ngBoilerplate', [
-	'templates-app',
-	'templates-common',
-	'ngBoilerplate.login',
-	'ngBoilerplate.home',
-	'ngBoilerplate.about',
+	//angular resources
 	'ui.router',
 	'ngResource',
-	'ngAnimate'
+	'ngAnimate',
+	//combined templates and common plugins
+	'templates-app',
+	'templates-common',
+	//routes
+	'ngBoilerplate.login',
+	'ngBoilerplate.home',
+	//Core Systems
+	'ngBoilerplate.API',
+	'ngBoilerplate.USER'
 	])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-	$urlRouterProvider.otherwise( '/home' );
+	$urlRouterProvider.otherwise( '/login' );
 })
 
 .run( function($rootScope,   $state,   $stateParams) {
