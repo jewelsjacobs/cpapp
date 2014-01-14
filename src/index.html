@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="ngBoilerplate" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="pageTitle"></title>
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default" role="navigation">
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#/home">home</a></li>
+        </ul>        
+      </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div class="container" ui-view="main"></div>
+
+
+  </body>
+</html>
