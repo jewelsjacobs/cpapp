@@ -37,57 +37,65 @@ angular.module( 'ngBoilerplate.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope, $q, $timeout ) {
+.controller( 'HomeCtrl', function HomeController( $scope, $q, $timeout, USER ) {
   console.log('HomeCtrl');
+
+  var data = USER.getUsers();
+
+  var rows = [];
+  data.then(function(result){
+
+    angular.forEach(result.users, function(value, key){
+      var row = {
+        items:[]
+      };
+      row.items.push({
+        content:value.id
+      });
+      row.items.push({
+        content:value.username
+      });
+      row.items.push({
+        content:value.firstname
+      });
+      row.items.push({
+        content:value.lastname
+      });
+      row.items.push({
+        content:value.status
+      }); 
+
+      rows.push(row);
+
+    });
+  });
 
   $scope.myTable = {
     columns: [
         {
-          title:'Name'
+          title:'id'
         },
         {
-          title:'URL'
+          title:'username'
         },
         {
-          title:'User'
-        }                
+          title:'first name'
+        },
+        {
+          title:'last name'
+        },
+        {
+          title:'status'
+        }                 
       ],
 
-      rows: [
-      {
-        title:'row 1',
-        items:[
-          {
-            content:'My Name'
-          },
-          {
-            content:'http://mysite.com'
-          },
-          {
-            content:'username'
-          }
-        ]
-      },
-      {
-        title:'row 2',
-        items:[
-          {
-            content:'My Other Name'
-          },
-          {
-            content:'http://myothersite.com'
-          },
-          {
-            content:'anotherusername'
-          }
-        ]
-      }      
-    ],
+      rows: rows,
 
     cog:"true",
     checkbox:"true",
     status:""
     };
+
 
     console.log($scope.myTable);
 })
