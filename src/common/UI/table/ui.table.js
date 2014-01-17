@@ -19,7 +19,12 @@ angular.module('rs.UI.table', [])
 	'		<td ng-repeat="item in row.items">{{item.content}}</td>'+
 	'	</tr>'+
 	'</tbody>'+
-'</table>';
+'</table>'+
+'<div ng-hide="options.rows.length>0" class="rs-table-overlay rs-table-overlay-loading">'+
+'  <div class="rs-table-overlay-content">'+
+'    <div class="rs-table-overlay-message">Loading&hellip;</div>'+
+'  </div>'+
+'</div>';
 
     $templateCache.put('$rsTable.tpl', template);
 
