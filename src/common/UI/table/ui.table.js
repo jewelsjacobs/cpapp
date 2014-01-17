@@ -103,7 +103,20 @@ angular.module('rs.UI.table', [])
 		
 		if(controller) {
 			controller.$render = function() {
-				console.log(controller.$modelValue);
+
+				angular.forEach(controller.$modelValue.rows, function(value, key) {
+					var items = [];
+					var v = value;
+					angular.forEach(controller.$modelValue.columns, function(value, key){
+						items.push({
+							content:v[value.content]
+						});
+					});
+					value.items = items;
+
+				});
+
+				
 				scope.options = controller.$modelValue;
 			};
 		}

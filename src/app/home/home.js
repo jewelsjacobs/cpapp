@@ -40,61 +40,41 @@ angular.module( 'ngBoilerplate.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, $q, $timeout, USER ) {
   console.log('HomeCtrl');
 
-  var data = USER.getUsers();
 
-  var rows = [];
-  data.then(function(result){
-
-    angular.forEach(result.users, function(value, key){
-      var row = {
-        items:[]
-      };
-      row.items.push({
-        content:value.id
-      });
-      row.items.push({
-        content:value.username
-      });
-      row.items.push({
-        content:value.firstname
-      });
-      row.items.push({
-        content:value.lastname
-      });
-      row.items.push({
-        content:value.status
-      }); 
-
-      rows.push(row);
-
-    });
-  });
-
-  $scope.myTable = {
+  USER.getUsers().then(function(result){
+    $scope.myTable = {
     columns: [
         {
-          title:'id'
+          title:'id',
+          content:'id'
         },
         {
-          title:'username'
+          title:'username',
+          content:'username'
         },
         {
-          title:'first name'
+          title:'first name',
+          content:'firstname'
         },
         {
-          title:'last name'
+          title:'last name',
+          content:'lastname'
         },
         {
-          title:'status'
+          title:'status',
+          content:'status'
         }                 
       ],
 
-      rows: rows,
+      rows: result.users,
 
     cog:"true",
     checkbox:"true",
     status:""
     };
+  });
+
+  
 
 
     console.log($scope.myTable);
