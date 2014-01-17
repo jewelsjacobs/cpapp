@@ -11,7 +11,8 @@ angular.module( 'ngBoilerplate', [
 	'ngBoilerplate.home',
 	//Core Systems
 	'ngBoilerplate.API',
-	'ngBoilerplate.USER'
+	'ngBoilerplate.USER',
+	'rs.UI'
 	])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {

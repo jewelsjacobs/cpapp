@@ -64,6 +64,7 @@ angular.module( 'ngBoilerplate.login', [
       var ths = this;
 
       USER.getToken($scope.login).then(function(result){
+        console.log(result);
         $scope.loggedIn = {
           token:result
         };

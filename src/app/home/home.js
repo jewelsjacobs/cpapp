@@ -40,8 +40,55 @@ angular.module( 'ngBoilerplate.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, $q, $timeout ) {
   console.log('HomeCtrl');
 
+  $scope.myTable = {
+    columns: [
+        {
+          title:'Name'
+        },
+        {
+          title:'URL'
+        },
+        {
+          title:'User'
+        }                
+      ],
+
+      rows: [
+      {
+        title:'row 1',
+        items:[
+          {
+            content:'My Name'
+          },
+          {
+            content:'http://mysite.com'
+          },
+          {
+            content:'username'
+          }
+        ]
+      },
+      {
+        title:'row 2',
+        items:[
+          {
+            content:'My Other Name'
+          },
+          {
+            content:'http://myothersite.com'
+          },
+          {
+            content:'anotherusername'
+          }
+        ]
+      }      
+    ],
+
+    cog:"true",
+    checkbox:"true",
+    status:""
+    };
+
+    console.log($scope.myTable);
 })
 ;
-
-
-
