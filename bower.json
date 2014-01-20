@@ -10,12 +10,14 @@
     "angular-cookies": "1.2.6",
     "angular-sanitize": "1.2.6",
     "angular-ui-router": "0.2.7",
-    "angular-ui-utils": "~0.0.3",    
+    "angular-ui-utils": "~0.0.3",
     "font-awesome": "~4.0.3",
     "bootstrap": "3.0",
     "underscore": "~1.5.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "angular-strap": "~2.0.0"
+  },
   "resolutions": {
     "angular": "1.2.6"
   }

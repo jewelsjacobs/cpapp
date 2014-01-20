@@ -1,4 +1,4 @@
-angular.module('rs.UI.table', [])
+angular.module('rs.UI.table', ['rs.UI.cog'])
 
   .run(function($templateCache) {
 
@@ -16,7 +16,7 @@ angular.module('rs.UI.table', [])
 	'		<td ng-if="options.status" rs-table-status></td>'+
 	'		<td ng-if="options.checkbox" rs-table-checkbox></td>'+
 	'		<td ng-if="options.cog" rs-table-cog></td>'+
-	'		<td ng-repeat="item in row.items">{{item.content}}</td>'+
+	'		<td ng-repeat="item in row.items" class="{{item.class}}">{{item.content}}</td>'+
 	'	</tr>'+
 	'</tbody>'+
 '</table>'+
@@ -29,17 +29,17 @@ angular.module('rs.UI.table', [])
     $templateCache.put('$rsTable.tpl', template);
 
 
+
+
+  })
+.run(function($templateCache){
+
     //checkbox
 	var checkbox = '<input type="checkbox" />';
 
     $templateCache.put('$rsTable.checkbox.tpl', checkbox);    
 
-    //cog
-	var cog = '<span class="glyphicon glyphicon-cog"></span>';
-
-    $templateCache.put('$rsTable.cog.tpl', cog); 
-
-  })
+})
 
   .provider('$rsTable', function() {
 
@@ -100,24 +100,35 @@ angular.module('rs.UI.table', [])
       link: function postLink(scope, element, attr, controller) {
         // Directive options
 		// model -> view
+
 		
 		if(controller) {
+
+
 			controller.$render = function() {
 
-				angular.forEach(controller.$modelValue.rows, function(value, key) {
-					var items = [];
-					var v = value;
-					angular.forEach(controller.$modelValue.columns, function(value, key){
-						items.push({
-							content:v[value.content]
-						});
-					});
-					value.items = items;
+				//we are returning a promse here
+				controller.$modelValue.then(function(results){
 
+					angular.forEach(results.rows, function(value, key) {
+						var items = [];
+						var v = value;
+						angular.forEach(results.columns, function(value, key){
+							items.push({
+								content:v[value.content]
+							});
+						});
+						value.items = items;
+
+					});
+					//adding the results of the promise to the scope
+					console.log(results);
+					scope.options = results;
 				});
 
+
 				
-				scope.options = controller.$modelValue;
+				
 			};
 		}
 
@@ -169,34 +180,6 @@ angular.module('rs.UI.table', [])
 
 
 
-.provider('$rsTableCog', function() {
-
-	var defaults = this.defaults = {
-		template: '$rsTable.cog.tpl'
-	};
-
-	this.$get = function() {
-		return {defaults: defaults};
-	};
-
-})
-.directive('rsTableCog', function($window, $animate, $rsTableCog) {
-
-	var defaults = $rsTableCog.defaults;
-
-	return {
-		restrict: 'EA',
-		require: '?ngModel',
-		templateUrl: function(element, attr) {
-			return attr.template || defaults.template;
-		},
-		link: function postLink(scope, element, attr, controller) {
-
-
-		}
-	};
-
-})
 
 .provider('$rsTableStatus', function() {
 

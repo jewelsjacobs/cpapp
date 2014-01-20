@@ -40,43 +40,53 @@ angular.module( 'ngBoilerplate.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, $q, $timeout, USER ) {
   console.log('HomeCtrl');
 
+  var getTable = function() {
+    var deferred = $q.defer();
 
-  USER.getUsers().then(function(result){
-    $scope.myTable = {
-    columns: [
-        {
-          title:'id',
-          content:'id'
-        },
-        {
-          title:'username',
-          content:'username'
-        },
-        {
-          title:'first name',
-          content:'firstname'
-        },
-        {
-          title:'last name',
-          content:'lastname'
-        },
-        {
-          title:'status',
-          content:'status'
-        }                 
+
+    var options = {
+      columns: [
+      {
+        title:'id',
+        content:'id'
+      },
+      {
+        title:'username',
+        content:'username'
+      },
+      {
+        title:'first name',
+        content:'firstname'
+      },
+      {
+        title:'last name',
+        content:'lastname'
+      },
+      {
+        title:'status',
+        content:'status'
+      },
+      {
+        title:'something eles',
+        content:'status'
+      }                  
       ],
-
-      rows: result.users,
-
-    cog:"true",
-    checkbox:"true",
-    status:""
+      rows:{},
+      cog:"true",
+      checkbox:"true",
+      status:""
     };
-  });
 
-  
+    USER.getUsers()
+    .then(function(results){
+      options.rows = results.users; 
+      deferred.resolve(options);
+    });
 
+    return deferred.promise;
+  };
 
-    console.log($scope.myTable);
+  $scope.myTable = getTable();
+
 })
 ;

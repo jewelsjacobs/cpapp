@@ -3,6 +3,7 @@ angular.module( 'ngBoilerplate', [
 	'ui.router',
 	'ngResource',
 	'ngAnimate',
+	'ngSanitize',
 	//combined templates and common plugins
 	'templates-app',
 	'templates-common',
